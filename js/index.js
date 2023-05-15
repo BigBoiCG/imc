@@ -31,5 +31,8 @@ function removeResult(){
     });
 }
 
-// taille.value
-// (document.querySelector('#taille')).value
+// to do :
+// - checker si le texte entré est bien des nombres
+// - transformer les virgules en points 
+// - faire une fonction qui checke tout ça
+// - afficher un message qui dit "votre IMC est blablabla"
