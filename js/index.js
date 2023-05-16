@@ -1,27 +1,22 @@
-const taille = document.querySelector('#taille')
-const poids = document.querySelector('#poids')
-const submit = document.querySelector('#submit')
+const formImc = document.forms.formImc
+// const submit = formImc.submit
 
-form.addEventListener('submit', function(e){
+formImc.addEventListener('submit', function(e){
     e.preventDefault()
-    removeResult()
+    const taille = formImc.taille
+    const poids = formImc.poids
     // console.log(poids.value);
     // console.log(taille.value);
-    displayResult(imc(poids.value, taille.value), submit.parentElement);
+    const endResult = imc(poids.value, taille.value);
+    createDiv(endResult)
 })
+
+console.log(document.querySelectorAll('.result'));
  
 function imc(poids, taille){
-    let result = 0
     let tailleM = taille/100
-    result = poids/(tailleM*tailleM)
+    let result = poids/(Math.pow(tailleM, 2))
     return Math.round(result)
-}
-
-function displayResult(result, place){
-    const span = document.createElement('span')
-        span.innerHTML = result
-        span.classList.add('result')
-        place.append(span)
 }
 
 function removeResult(){
@@ -31,7 +26,28 @@ function removeResult(){
     });
 }
 
+function createDiv(text){
+    const div = document.createElement('div')
+    div.innerHTML = text
+    div.classList.add('result')
+    formImc.insertAdjacentHTML("afterend", div);
+    console.log(div);
+
+}
+
+// function createDiv(elem, elemParent,text, className ){
+//     const div = document.createElement(elem)
+//     div.innerHTML = text
+//     div.classList.add(className)
+//     elemParent.insertAdjacentHTML("afterend", text);
+
+// }
+
+
 // to do :
+// - checker comment accéder au HTMLDivElement pour pouvoir faire le RemoveError
+// - Faire la fonction createDiv générale et paramétrable, qui nous servira sur la création des messages d'erreur
+// - afficher message d'erreur si pas bonnes données rentrées
 // - checker si le texte entré est bien des nombres
 // - transformer les virgules en points 
 // - faire une fonction qui checke tout ça
